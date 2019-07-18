@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	git "gopkg.in/src-d/go-git.v4"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -40,9 +38,8 @@ func main() {
         }else{
             us = "armada"
         }
-        url = gi + "/" + us + "/" + repo.Repository/*  + "/tree/" + vers */
-        fmt.Println(gi + "/" + us + "/" + repo.Repository +"/tree/" + vers)
-        _, err := git.PlainClone("/Temp/"+ repo.Repository, false, &git.CloneOptions{
+        url = gi + "/" + us + "/" + repo.Repository
+        _, err := git.PlainClone("/tmp/"+ repo.Repository, false, &git.CloneOptions{
             URL: url,
             Progress: os.Stdout,
             ReferenceName: plumbing.ReferenceName("refs/heads/" + vers),

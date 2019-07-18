@@ -1,3 +1,5 @@
+package main
+
 type Config struct {
     Repo []Repo
 }
