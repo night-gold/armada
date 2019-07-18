@@ -9,5 +9,3 @@ It allows you to git clone a packaged kustomize base and call it with the help o
 ## Community
 
 ## ToDo
-
-

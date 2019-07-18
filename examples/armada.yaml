@@ -3,3 +3,4 @@ repo:
   - repository: armada-prom-op
     version: master
     user: night-gold
+    folder: "."

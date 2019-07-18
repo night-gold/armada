@@ -22,7 +22,7 @@ func main() {
     }
 
     for _, repo := range config.Repo {
-        var vers,gi,us,url string
+        var vers,gi,us,url,fo string
         if repo.Version != ""{
            vers = repo.Version
         }else{
@@ -38,6 +38,11 @@ func main() {
         }else{
             us = "armada"
         }
+        if repo.Folder != ""{
+            fo = repo.Folder
+        }else{
+            fo = repo.Repository
+        }
         url = gi + "/" + us + "/" + repo.Repository
         _, err := git.PlainClone("/tmp/"+ repo.Repository, false, &git.CloneOptions{
             URL: url,
@@ -48,8 +53,8 @@ func main() {
         if err != nil {
             panic(err)
         }
-        
-        erro := copy.All("/tmp/"+repo.Repository +"/base", repo.Repository + "/base")
+
+        erro := copy.All("/tmp/"+repo.Repository +"/base", fo + "/base")
         if erro != nil {
             panic(erro)
         }

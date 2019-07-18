@@ -9,4 +9,5 @@ type Repo struct {
     Git string
     Version string
     User string
+    Folder string
 }
