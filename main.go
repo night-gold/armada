@@ -72,5 +72,8 @@ func main() {
         if erro != nil {
             panic(cmd)
         }
+
+        os.RemoveAll("/tmp/"+repo.Repository)
+        os.RemoveAll(fo+"/base")
     }
 }
