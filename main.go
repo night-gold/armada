@@ -1,6 +1,7 @@
 package main
 
 import (
+    "fmt"
 	git "gopkg.in/src-d/go-git.v4"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -68,10 +69,11 @@ func main() {
             panic(erro)
         }
 
-        cmd := exec.Command("/bin/bash", "kustomize build overlays/"+ov)
-        if erro != nil {
+        cmd, errors := exec.Command("kustomize build overlays/"+ov).Output()
+        if errors != nil {
             panic(cmd)
         }
+        fmt.Println(cmd)
 
         os.RemoveAll("/tmp/"+repo.Repository)
         os.RemoveAll(fo+"/base")
