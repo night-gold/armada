@@ -4,7 +4,8 @@ import (
 	git "gopkg.in/src-d/go-git.v4"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"os"
+    "os"
+    "os/exec"
     "gopkg.in/src-d/go-git.v4/plumbing"
     "github.com/matthewrsj/copy"
 )
@@ -68,5 +69,8 @@ func main() {
         }
 
         cmd := exec.Command("/bin/bash", "kustomize build overlays/"+fo)
+        if erro != nil {
+            panic(cmd)
+        }
     }
 }
