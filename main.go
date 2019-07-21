@@ -26,7 +26,7 @@ func init() {
 
 func main() {
     for _, repo := range config.Repo {
-        var vers,gi,us,url,fo string
+        var vers,gi,us,url,fo,ov string
         if repo.Version != ""{
            vers = repo.Version
         }else{
@@ -48,9 +48,9 @@ func main() {
             fo = repo.Repository
         }
         if repo.Overlays != ""{
-            fo = repo.Overlays
+            ov = repo.Overlays
         }else{
-            fo = "apply"
+            ov = "apply"
         }
         url = gi + "/" + us + "/" + repo.Repository
         _, err := git.PlainClone("/tmp/"+ repo.Repository, false, &git.CloneOptions{
