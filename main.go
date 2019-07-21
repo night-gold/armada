@@ -68,7 +68,7 @@ func main() {
             panic(erro)
         }
 
-        cmd := exec.Command("/bin/bash", "kustomize build overlays/"+fo)
+        cmd := exec.Command("/bin/bash", "kustomize build overlays/"+ov)
         if erro != nil {
             panic(cmd)
         }
