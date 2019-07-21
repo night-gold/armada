@@ -10,4 +10,5 @@ type Repo struct {
     Version string
     User string
     Folder string
+    Overlays string
 }

@@ -9,9 +9,10 @@ import (
     "github.com/matthewrsj/copy"
 )
 
-func main() {
+var config Config
+
+func init() {
     filename := os.Args[1]
-    var config Config
     source, err := ioutil.ReadFile(filename)
     if err != nil {
         panic(err)
@@ -20,7 +21,9 @@ func main() {
     if err != nil {
         panic(err)
     }
+}
 
+func main() {
     for _, repo := range config.Repo {
         var vers,gi,us,url,fo string
         if repo.Version != ""{
@@ -43,6 +46,11 @@ func main() {
         }else{
             fo = repo.Repository
         }
+        if repo.Overlays != ""{
+            fo = repo.Overlays
+        }else{
+            fo = "apply"
+        }
         url = gi + "/" + us + "/" + repo.Repository
         _, err := git.PlainClone("/tmp/"+ repo.Repository, false, &git.CloneOptions{
             URL: url,
@@ -58,5 +66,7 @@ func main() {
         if erro != nil {
             panic(erro)
         }
+
+        cmd := exec.Command("/bin/bash", "kustomize build overlays/"+fo)
     }
 }
