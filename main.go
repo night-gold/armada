@@ -69,7 +69,7 @@ func main() {
             panic(erro)
         }
 
-        cmd, errors := exec.Command("kustomize build overlays/"+ov).Output()
+        cmd, errors := exec.Command("kustomize build overlays/"+ ov +" > "+ repo.Repository +".yaml").Output()
         if errors != nil {
             panic(cmd)
         }
