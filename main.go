@@ -54,7 +54,7 @@ func main() {
             ov = "apply"
         }
         url = gi + "/" + us + "/" + repo.Repository
-        _, err := git.PlainClone("/tmp/"+ repo.Repository, false, &git.CloneOptions{
+        _, err := git.PlainClone(os.TempDir()+ repo.Repository, false, &git.CloneOptions{
             URL: url,
             Progress: os.Stdout,
             ReferenceName: plumbing.ReferenceName("refs/heads/" + vers),
@@ -64,7 +64,7 @@ func main() {
             panic(err)
         }
 
-        erro := copy.All("/tmp/"+repo.Repository +"/base", fo + "/base")
+        erro := copy.All(os.TempDir()+repo.Repository +"/base", fo + "/base")
         if erro != nil {
             panic(erro)
         }
@@ -75,7 +75,7 @@ func main() {
         }
         fmt.Println(cmd)
 
-        os.RemoveAll("/tmp/"+repo.Repository)
+        os.RemoveAll(os.TempDir()+repo.Repository)
         os.RemoveAll(fo+"/base")
     }
 }
