@@ -1,10 +1,9 @@
 package main
 
 import (
-    "fmt"
-	git "gopkg.in/src-d/go-git.v4"
-	"gopkg.in/yaml.v2"
-	"io/ioutil"
+    git "gopkg.in/src-d/go-git.v4"
+    "gopkg.in/yaml.v2"
+    "io/ioutil"
     "os"
     "os/exec"
     "gopkg.in/src-d/go-git.v4/plumbing"
@@ -69,11 +68,17 @@ func main() {
             panic(erro)
         }
 
-        cmd, errors := exec.Command("kustomize build overlays/"+ ov +" > "+ repo.Repository +".yaml").Output()
-        if errors != nil {
-            panic(cmd)
+        cmd := exec.Command("kustomize","build", "overlays/"+ ov)
+        outfile, err := os.Create(repo.Repository + ".yaml")
+        if err != nil {
+            panic(err)
         }
-        fmt.Println(cmd)
+        defer outfile.Close()
+        cmd.Stdout = outfile
+        err = cmd.Start(); if err != nil {
+            panic(err)
+        }
+        cmd.Wait()
 
         os.RemoveAll(os.TempDir()+"/"+repo.Repository)
         os.RemoveAll(fo+"/base")
