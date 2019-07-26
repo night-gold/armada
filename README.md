@@ -6,7 +6,7 @@ It allows you to git clone a packaged kustomize base and call it with the help o
 
 ## Usage
 
-Create a armada.yaml file in each one of your kustomize infra folder.
+Create an armada.yaml file in each one of your kustomize infra folder where you have your overlays.
 
 Use armada to generate the app.yaml file.
 ```bash
