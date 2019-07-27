@@ -68,7 +68,7 @@ func main() {
             panic(erro)
         }
 
-        cmd := exec.Command("kustomize","build", "overlays/"+ ov)
+        cmd := exec.Command("kubectl","kustomize", "overlays/"+ ov)
         outfile, err := os.Create(repo.Repository + ".yaml")
         if err != nil {
             panic(err)
