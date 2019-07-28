@@ -32,7 +32,6 @@ func main() {
         }
 
         for _, repo := range config.Repo {
-            /* var vers,gi,us,url,fo,ov string */
             if repo.Version == ""{
                 repo.Version = "master"
             }
@@ -48,7 +47,6 @@ func main() {
             if repo.Overlays != ""{
                 repo.Overlays = "apply"
             }
-            /* url = gi + "/" + us + "/" + repo.Repository */
             _, err := git.PlainClone(os.TempDir()+"/"+ repo.Repository, false, &git.CloneOptions{
                 URL: repo.Git + "/" + repo.User + "/" + repo.Repository,
                 Progress: os.Stdout,
