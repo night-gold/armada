@@ -32,53 +32,43 @@ func main() {
         }
 
         for _, repo := range config.Repo {
-            var vers,gi,us,url,fo,ov string
-            if repo.Version != ""{
-            vers = repo.Version
-            }else{
-                vers = "master"
+            /* var vers,gi,us,url,fo,ov string */
+            if repo.Version == ""{
+                repo.Version = "master"
             }
-            if repo.Git != ""{
-                gi = repo.Git
-            }else{
-                gi = "https://github.com"
+            if repo.Git == ""{
+                repo.Git = "https://github.com"
             }
-            if repo.User != ""{
-                us = repo.User
-            }else{
-                us = "armada"
+            if repo.User == ""{
+                repo.User = "armada"
             }
             if repo.Folder != ""{
-                fo = repo.Folder
-            }else{
-                fo = repo.Repository
+                repo.Folder = repo.Repository
             }
             if repo.Overlays != ""{
-                ov = repo.Overlays
-            }else{
-                ov = "apply"
+                repo.Overlays = "apply"
             }
-            url = gi + "/" + us + "/" + repo.Repository
+            /* url = gi + "/" + us + "/" + repo.Repository */
             _, err := git.PlainClone(os.TempDir()+"/"+ repo.Repository, false, &git.CloneOptions{
-                URL: url,
+                URL: repo.Git + "/" + repo.User + "/" + repo.Repository,
                 Progress: os.Stdout,
-                ReferenceName: plumbing.ReferenceName("refs/heads/" + vers),
+                ReferenceName: plumbing.ReferenceName("refs/heads/" + repo.Version),
                 SingleBranch:  true,
             })
             if err != nil {
                 panic(err)
             }
 
-            erro := copy.All(os.TempDir()+"/"+repo.Repository +"/base", fo + "/base")
+            erro := copy.All(os.TempDir()+"/"+repo.Repository +"/base", repo.Folder + "/base")
             if erro != nil {
                 panic(erro)
             }
 
-            cmd := exec.Command("kubectl","kustomize", "overlays/"+ ov)
+            cmd := exec.Command("kubectl","kustomize", "overlays/"+ repo.Overlays)
             utils.CmdOutputToFile(cmd, repo.Repository + ".yaml")
 
             os.RemoveAll(os.TempDir()+"/"+repo.Repository)
-            os.RemoveAll(fo+"/base")
+            os.RemoveAll(repo.Overlays+"/base")
         }
     }
 }
