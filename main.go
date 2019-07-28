@@ -76,16 +76,6 @@ func main() {
 
             cmd := exec.Command("kubectl","kustomize", "overlays/"+ ov)
             utils.CmdOutputToFile(cmd, repo.Repository + ".yaml")
-            /* outfile, err := os.Create(repo.Repository + ".yaml")
-            if err != nil {
-                panic(err)
-            }
-            defer outfile.Close()
-            cmd.Stdout = outfile
-            err = cmd.Start(); if err != nil {
-                panic(err)
-            }
-            cmd.Wait() */
 
             os.RemoveAll(os.TempDir()+"/"+repo.Repository)
             os.RemoveAll(fo+"/base")
