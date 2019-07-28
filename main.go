@@ -68,7 +68,7 @@ func main() {
             utils.CmdOutputToFile(cmd, repo.Repository + ".yaml")
 
             os.RemoveAll(os.TempDir()+"/"+repo.Repository)
-            os.RemoveAll(repo.Overlays+"/base")
+            os.RemoveAll(repo.Folder+"/base")
         }
     }
 }
