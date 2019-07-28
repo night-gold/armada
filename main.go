@@ -9,16 +9,16 @@ import (
     "os/exec"
     "gopkg.in/src-d/go-git.v4/plumbing"
     "github.com/matthewrsj/copy"
+    "github.com/night-gold/armada/utils"
 )
 
-var config Config
-
 func main() {
+    var config Config
+
     file := flag.String("f", "armada.yaml", "Armada package file to load")
     help := flag.Bool("h", false, "Print the help")
     flag.Parse()
     
-
     if *help {
 		flag.PrintDefaults()
 	} else {
@@ -75,7 +75,8 @@ func main() {
             }
 
             cmd := exec.Command("kubectl","kustomize", "overlays/"+ ov)
-            outfile, err := os.Create(repo.Repository + ".yaml")
+            utils.CmdOutputToFile(cmd, repo.Repository + ".yaml")
+            /* outfile, err := os.Create(repo.Repository + ".yaml")
             if err != nil {
                 panic(err)
             }
@@ -84,7 +85,7 @@ func main() {
             err = cmd.Start(); if err != nil {
                 panic(err)
             }
-            cmd.Wait()
+            cmd.Wait() */
 
             os.RemoveAll(os.TempDir()+"/"+repo.Repository)
             os.RemoveAll(fo+"/base")
