@@ -10,7 +10,7 @@ Create an armada.yaml file in each one of your kustomize infra folder where you 
 
 Use armada to generate the app.yaml file.
 ```bash
-armada armada.yaml
+armada -f armada.yaml
 ```
 
 The generated file can be used directly to deploy to a kubernetes cluster using `kubectl -f app.yaml` or stored on a git repo or any other storage like (S3,GCS...) to be stored and versionned.
