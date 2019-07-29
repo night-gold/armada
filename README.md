@@ -48,11 +48,11 @@ The generated file can be used directly to deploy to a kubernetes cluster using 
 
 ## Community
 
-## Create a package
+### Code of conduct 
 
-## Repository participation
+### Create a package
 
-## ToDo
+### ToDo
 
  - [ ] Write some test
  - [ ] Add overlays options (-o, default value and file option)
