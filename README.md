@@ -48,9 +48,9 @@ The generated file can be used directly to deploy to a kubernetes cluster using 
 
 ## Community
 
-### 1) Create a package
+## Create a package
 
-### 2)
+## Repository participation
 
 ## ToDo
 
