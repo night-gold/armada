@@ -59,3 +59,4 @@ The generated file can be used directly to deploy to a kubernetes cluster using 
  - [ ] Add auto apply option (-a)
  - [ ] Make a better documentation
  - [ ] Allow default overlays generation with overlays value in file
+ - [ ] Allow package multiple deployment inside a single namespace (naming of each resources)
