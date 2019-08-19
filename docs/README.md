@@ -2,4 +2,5 @@
 
 * [Installation](INSTALL.md)
 * [Examples](../examples)
-* [versioning](versioning.md)
+* [Versioning](versioning.md)
+* [Packages](packages.md)
