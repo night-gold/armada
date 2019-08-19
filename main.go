@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
-	"log"
 
 	"github.com/matthewrsj/copy"
 	"github.com/night-gold/armada/utils"
