@@ -4,22 +4,22 @@ A package contains the minimal configuration to deploy an apps without specific 
 
 ## Content
 
-A package should be organised like this:
+A package specific repository root folder should be organised like this:
 
 > ```
 > /base
 > /docs
-> ├── redis
-> │   ├── armada.yaml
-> │   └── overlays
-> │       └── apply
-> │           └── kustomization.yaml
-> └── Microservice
->     ├── armada.yaml
->     └── overlays
->         └── apply
->             └── kustomization.yaml
+> /examples
+> README.md
 > ```
+
+The **base** folder should contain a basic non specific (as much as possible) kustomize config.
+
+The **docs** folder contains docs with specific config explanations. This folder is optional.
+
+The **examples** folder contains overlays examples. It should at least contains one working example of a deployment on any plateform and with any type of ingress. It can contains specific documentation.
+
+The **README.md** must contains a description of what is deployed if it's not in the docs folder and if it's a package specific repository a link to the official doc of the app.
 
 ## Should not be includer inside a package base folder
 
