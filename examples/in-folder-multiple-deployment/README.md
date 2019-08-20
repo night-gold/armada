@@ -4,7 +4,7 @@ You can use armada to deploy the same app multiple time using multiple overlays,
 
 The folder should be organised as follow:
 
-```bash
+>```
 >/app
 >├── armada.yaml
 >└── overlays
@@ -12,7 +12,7 @@ The folder should be organised as follow:
 >    │   └── kustomization.yaml
 >    └── apply2
 >        └── kustomization.yaml
-```
+>```
 
 For the deployment of the fisrt overlays no need to specify the overlay we need to use as it's the default value, but to deploy the second one we muste add the overlays with the name of the folder.
 
