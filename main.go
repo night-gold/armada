@@ -61,7 +61,15 @@ func main() {
 		}
 
 		cmd := exec.Command("kubectl", "kustomize", "overlays/"+repo.Overlays)
-		utils.CmdOutputToFile(cmd, repo.Repository+".yaml")
+		cmd.Dir = repo.Folder
+
+		if repo.Folder != repo.Repository && repo.Folder != "." {
+			utils.CmdOutputToFile(cmd, repo.Folder+".yaml")
+		} else if repo.Overlays == "apply" {
+			utils.CmdOutputToFile(cmd, repo.Repository+".yaml")
+		} else {
+			utils.CmdOutputToFile(cmd, repo.Repository+"-"+repo.Overlays+".yaml")
+		}
 
 		os.RemoveAll(os.TempDir() + "/" + repo.Repository)
 		os.RemoveAll(repo.Folder + "/base")
