@@ -21,7 +21,7 @@ The **examples** folder contains overlays examples. It should at least contains 
 
 The **README.md** must contains a description of what is deployed if it's not in the docs folder and if it's a package specific repository a link to the official doc of the app.
 
-## Should not be includer inside a package base folder
+## Package base folder restrictions
 
 The minimal configuration thinking put some restriction on the resources that can be included inside the base folder, some of them should not exists within:
 
