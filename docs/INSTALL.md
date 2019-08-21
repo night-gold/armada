@@ -6,5 +6,5 @@ To render the armada command line available for everyone:
 
 ```bash
 chmod +x armada-binary
-sudo mv armada-binary /usr/local/bin/armada
+sudo mv armada-binary /usr/bin/armada
 ```

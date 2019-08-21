@@ -1,5 +1,11 @@
 # Armada fields
 
+## Command line option
+
+- **-f** Path to the file with the armada configuration
+
+## Armada file fields
+
 - **repository** : This field has the name of the repository we want to use. It also serves as the default value for the folder and the result file name. This field has no default value, it's a necessary field.
 - **git** : The url of the git we are going to look for the package, gitlab, github, etc... The default value is https://github.com.
 - **version** : The tag or branch we want to use for the package. Default value is `master`.
