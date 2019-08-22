@@ -64,7 +64,7 @@ See specific documentation for [packages](docs/packages.md)
 ### ToDo
 
  - [ ] Write some test
- - [ ] Add overlays options (-o, default value and file option)
+ - [x] ~~Add overlays options (-o, default value and file option)~~
  - [ ] Add auto apply option (-a)
  - [ ] Make a better documentation
  - [ ] Add git authentication options
