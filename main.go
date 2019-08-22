@@ -68,8 +68,6 @@ func main() {
 
 		if repo.Folder != repo.Repository && repo.Folder != "." {
 			utils.CmdOutputToFile(cmd, repo.Folder+"-"+repo.Overlays+".yaml")
-		} else if repo.Overlays == "apply" {
-			utils.CmdOutputToFile(cmd, repo.Repository+".yaml")
 		} else {
 			utils.CmdOutputToFile(cmd, repo.Repository+"-"+repo.Overlays+".yaml")
 		}
