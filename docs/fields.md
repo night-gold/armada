@@ -3,6 +3,7 @@
 ## Command line option
 
 - **-f** Path to the file with the armada configuration
+- **-o** Default overlays you are deploying, value can be overrided by the overlays field in armada file.
 
 ## Armada file fields
 
