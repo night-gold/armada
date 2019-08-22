@@ -18,6 +18,7 @@ func main() {
 	var config Config
 
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
+	overlays := flag.String("o", "", "Default overlays for all deployment")
 	flag.Parse()
 
 	source, err := ioutil.ReadFile(*file)
@@ -42,7 +43,9 @@ func main() {
 		if repo.Folder == "" {
 			repo.Folder = repo.Repository
 		}
-		if repo.Overlays == "" {
+		if *overlays != "" && repo.Overlays == "" {
+			repo.Overlays = *overlays
+		} else if repo.Overlays == "" {
 			repo.Overlays = "apply"
 		}
 		_, err := git.PlainClone(os.TempDir()+"/"+repo.Repository, false, &git.CloneOptions{
@@ -64,7 +67,7 @@ func main() {
 		cmd.Dir = repo.Folder
 
 		if repo.Folder != repo.Repository && repo.Folder != "." {
-			utils.CmdOutputToFile(cmd, repo.Folder+".yaml")
+			utils.CmdOutputToFile(cmd, repo.Folder+"-"+repo.Overlays+".yaml")
 		} else if repo.Overlays == "apply" {
 			utils.CmdOutputToFile(cmd, repo.Repository+".yaml")
 		} else {
