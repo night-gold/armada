@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -20,6 +21,7 @@ func main() {
 
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
 	overlays := flag.String("o", "", "Default overlays for all deployment")
+	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
 	flag.Parse()
 
 	source, err := ioutil.ReadFile(*file)
@@ -69,16 +71,33 @@ func main() {
 			log.Panic(erro)
 		}
 
-		cmd := exec.Command("kubectl", "kustomize", "overlays/"+repo.Overlays)
-		cmd.Dir = repo.Folder
-
-		if repo.Folder != repo.Repository && repo.Folder != "." {
-			utils.CmdOutputToFile(cmd, repo.Folder+"-"+repo.Overlays+".yaml")
+		if *apply {
+			cmd := exec.Command("kubectl", "apply", "-k", "overlays/"+repo.Overlays)
+			cmd.Dir = repo.Folder
+			//output, err := cmd.CombinedOutput()
+			err := cmd.Run()
+			if err != nil {
+				log.Panic(err)
+				fmt.Println("tets")
+			}
 		} else {
-			utils.CmdOutputToFile(cmd, repo.Repository+"-"+repo.Overlays+".yaml")
+			cmd := exec.Command("kubectl", "kustomize", "overlays/"+repo.Overlays)
+			cmd.Dir = repo.Folder
+
+			if repo.Folder != repo.Repository && repo.Folder != "." {
+				utils.CmdOutputToFile(cmd, repo.Folder+"-"+repo.Overlays+".yaml")
+			} else {
+				utils.CmdOutputToFile(cmd, repo.Repository+"-"+repo.Overlays+".yaml")
+			}
 		}
 
-		os.RemoveAll(os.TempDir() + "/" + repo.Repository)
-		os.RemoveAll(repo.Folder + "/base")
+		//os.RemoveAll(os.TempDir() + "/" + repo.Repository)
+		//os.RemoveAll(repo.Folder + "/base")
+		cleanFolder(repo.Repository, repo.Folder)
 	}
+}
+
+func cleanFolder(repo string, fold string) {
+	os.RemoveAll(os.TempDir() + "/" + repo)
+	os.RemoveAll(fold + "/base")
 }
