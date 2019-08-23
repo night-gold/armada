@@ -16,6 +16,7 @@ import (
 
 func main() {
 	var config Config
+	var url string
 
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
 	overlays := flag.String("o", "", "Default overlays for all deployment")
@@ -48,8 +49,13 @@ func main() {
 		} else if repo.Overlays == "" {
 			repo.Overlays = "apply"
 		}
+		if repo.Private {
+			url = repo.Git + ":" + repo.User + "/" + repo.Repository
+		} else {
+			url = repo.Git + "/" + repo.User + "/" + repo.Repository
+		}
 		_, err := git.PlainClone(os.TempDir()+"/"+repo.Repository, false, &git.CloneOptions{
-			URL:           repo.Git + "/" + repo.User + "/" + repo.Repository,
+			URL:           url,
 			Progress:      os.Stdout,
 			ReferenceName: plumbing.ReferenceName("refs/heads/" + repo.Version),
 			SingleBranch:  true,
