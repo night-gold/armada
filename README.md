@@ -30,7 +30,7 @@ Create an armada.yaml file in each one of your kustomize infra folder where you 
 
 ### 2) Configuration of the armada file
 
-The armada file configuration sould look like this.
+The armada file configuration should look like this.
 
 ```
 --- 

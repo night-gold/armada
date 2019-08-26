@@ -9,7 +9,7 @@ App:
 
 ## Details
 
-Details of the package should contains the link to the app repository, documention site if it exists and related repository if there is some.
+Details of the package should contains the link to the app repository, documentation site if it exists and related repository if there is some.
 
 ## Prerequisites
 

@@ -4,7 +4,7 @@ You can create any issue if you think there is an issue with armada.
 
 ## Specifics
 
-To have a better answer and prevent unneded exchange, and doing so having an answer faster, plaese add these field to your answer:
+To have a better answer and prevent unneeded exchange, and doing so, having an answer faster, please add these field to your answer:
 
 * Armada version
 * Os
