@@ -1,0 +1,7 @@
+---
+# List of labels common to all resources for this deployment
+commonLabels:
+  app: my-app
+# List of resources we are going to kustomize
+resources:
+- deployment.yaml
