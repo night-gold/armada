@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -77,8 +76,8 @@ func main() {
 			//output, err := cmd.CombinedOutput()
 			err := cmd.Run()
 			if err != nil {
+				cleanFolder(repo.Repository, repo.Folder)
 				log.Panic(err)
-				fmt.Println("tets")
 			}
 		} else {
 			cmd := exec.Command("kubectl", "kustomize", "overlays/"+repo.Overlays)
