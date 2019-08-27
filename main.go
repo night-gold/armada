@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"time"
 
 	"github.com/matthewrsj/copy"
 	"github.com/night-gold/armada/utils"
@@ -90,9 +91,11 @@ func main() {
 			}
 		}
 
-		//os.RemoveAll(os.TempDir() + "/" + repo.Repository)
-		//os.RemoveAll(repo.Folder + "/base")
 		cleanFolder(repo.Repository, repo.Folder)
+
+		if repo.Wait != 0 {
+			time.Sleep(time.Duration(repo.Wait) * time.Second)
+		}
 	}
 }
 

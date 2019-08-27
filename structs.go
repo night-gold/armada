@@ -14,4 +14,5 @@ type Repo struct {
 	Folder     string
 	Overlays   string
 	Private    bool
+	Wait       int
 }
