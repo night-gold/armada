@@ -53,6 +53,7 @@ The generated file can be used directly to deploy to a kubernetes cluster using 
 ## Community
 
 Before filling a bug please take a look here: [bugs](docs/bugs.md)
+Before making a merge request please take a look here: [merge request](docs/mr.md) 
 
 ### Code of conduct 
 
