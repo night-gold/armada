@@ -75,3 +75,4 @@ See specific documentation for [packages](docs/packages.md)
  - [ ] Add a cache option for package deployed multiple time
  - [ ] Add a sleep time if CRD creation for operator is a bit long (prometheus-operator) before creating new resources.
  - [ ] Allow non package restrictive repository to not store their base folder at the root of their repository.
+ - [ ] Add an stdout option?
