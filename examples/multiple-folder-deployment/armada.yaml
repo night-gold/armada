@@ -1,0 +1,7 @@
+---
+repo:
+  - repository: armada-prom-op
+    user: night-gold
+  - repository: armada-prom-op
+    user: night-gold
+    folder: armada-prom-op-1

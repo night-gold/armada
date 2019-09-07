@@ -1,0 +1,11 @@
+--- 
+repo:
+  - repository: armada-prom-op
+    version: master
+    user: night-gold
+    folder: "."
+  - repository: armada-prom-op
+    version: master
+    user: night-gold
+    overlays: apply1
+    folder: "."

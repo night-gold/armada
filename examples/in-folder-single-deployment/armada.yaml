@@ -1,0 +1,5 @@
+--- 
+repo:
+  - repository: armada-prom-op
+    user: night-gold
+    folder: "."

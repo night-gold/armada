@@ -1,0 +1,6 @@
+vendor/*
+overlays/*
+
+*.exe
+armada-*.yaml
+armada
