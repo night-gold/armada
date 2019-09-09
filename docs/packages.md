@@ -2,6 +2,12 @@
 
 A package contains the minimal configuration to deploy an apps without specific configuration.
 
+## Versionning
+
+For the packages specific repositories please try to follow the `vMAJOR.MINOR.PATCH` (vM.M.P). 
+
+If you have an app that may have multiple base deployment available, let's say traefik for example. You can create a branch specific and tag it using this format: `branch-vM.M.P` that would be for example: `daemonset-v.1.0.0` .
+
 ## Content
 
 A package specific repository root folder should be organised like this:
