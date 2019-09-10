@@ -10,6 +10,8 @@ For armada to works, you need to have a recent version of kubectl with kustomize
 
 ## Usage
 
+![Alt Text](https://i.imgur.com/JNoI2MY.gif)
+
 ### 1) Create a kustomize package file struct
 
 Create an armada.yaml file in each one of your kustomize infra folder where you have your overlays.
