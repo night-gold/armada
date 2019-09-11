@@ -2,7 +2,7 @@
 
 A package contains the minimal configuration to deploy an apps without specific configuration.
 
-## Versionning
+## Versioning
 
 For the packages specific repositories please try to follow the `vMAJOR.MINOR.PATCH` (vM.M.P). 
 

@@ -1,12 +1,12 @@
 # Armada
 
-Manage deployment of packaged (Kustomize)[https://github.com/kubernetes-sigs/kustomize] apps.
+Manage deployment of packaged [Kustomize](https://github.com/kubernetes-sigs/kustomize) apps.
 
 It allows you to git clone a packaged kustomize base and call it with the help of a config file.
 
 ## Pre-requisite
 
-For armada to works, you need to have a recent version of kubectl with kustomize integration as armada will make calls to the kubectl command line to build the yaml file using `kubectl -k` option.
+For armada to works, you need to have a recent version of kubectl (>= 1.14) with kustomize integration as armada will make calls to the kubectl command line to build the yaml file using `kubectl -k` option.
 
 ## Usage
 
