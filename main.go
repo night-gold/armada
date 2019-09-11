@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"time"
+	"regexp"
 
 	"github.com/matthewrsj/copy"
 	"github.com/night-gold/armada/utils"
@@ -56,10 +57,11 @@ func main() {
 		} else {
 			url = repo.Git + "/" + repo.User + "/" + repo.Repository
 		}
+		ref := setRef(repo.Version)
 		_, err := git.PlainClone(os.TempDir()+"/"+repo.Repository, false, &git.CloneOptions{
 			URL:           url,
 			Progress:      os.Stdout,
-			ReferenceName: plumbing.ReferenceName("refs/heads/" + repo.Version),
+			ReferenceName: plumbing.ReferenceName(ref + repo.Version),
 			SingleBranch:  true,
 		})
 		if err != nil {
@@ -102,4 +104,17 @@ func main() {
 func cleanFolder(repo string, fold string) {
 	os.RemoveAll(os.TempDir() + "/" + repo)
 	os.RemoveAll(fold + "/base")
+}
+
+func setRef(version string) string{
+	ref := "refs/heads/"
+	reg, err := regexp.MatchString(".*v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.*", version)
+	if err != nil {
+		log.Panic(err)
+	}
+	if (reg){
+		ref = "refs/tags/"
+		return ref
+	}
+	return ref 
 }
