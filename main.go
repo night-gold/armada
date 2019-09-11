@@ -108,7 +108,7 @@ func cleanFolder(repo string, fold string) {
 
 func setRef(version string) string{
 	ref := "refs/heads/"
-	reg, err := regexp.MatchString("*v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}*", version)
+	reg, err := regexp.MatchString(".*v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.*", version)
 	if err != nil {
 		log.Panic(err)
 	}
