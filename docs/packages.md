@@ -2,6 +2,12 @@
 
 A package contains the minimal configuration to deploy an apps without specific configuration.
 
+## Versioning
+
+For the packages specific repositories please try to follow the `vMAJOR.MINOR.PATCH` (vM.M.P). 
+
+If you have an app that may have multiple base deployment available, let's say traefik for example. You can create a branch specific and tag it using this format: `branch-vM.M.P` that would be for example: `daemonset-v.1.0.0` .
+
 ## Content
 
 A package specific repository root folder should be organised like this:
@@ -26,7 +32,7 @@ The **README.md** must contains a description of what is deployed if it's not in
 The minimal configuration thinking put some restriction on the resources that can be included inside the base folder, some of them should not exists within:
 
 * namespace : You can't force people to use the same namespace as you, no valid base should contains a namespace (excluding private packages)
-* ingress : The number of ingress available is a lot, if you create an ingress file, do not put specific annotations inside it. If you are not sure of the neutrality of your ingress, put overlays examples with full ingress configuration for one or more ingress.
+* ingress : For the best compatibility, do not create an Ingress file in the base folder as people may be using simple service LoadBalancer or service NodePort. Put ingress only inside overlays examples.
 * volumes : There is as much PVC as the number of cloud providers out there (maybe more) having a full working configuration may be hard with this. Having version specifics packages may be a good idea.
 
 ## Skeleton

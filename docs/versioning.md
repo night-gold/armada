@@ -8,4 +8,4 @@ There is no version relation between armada and any other kubernetes existing to
 
 ## Armada packages versioning
 
-The versioning of the differents packages created for armada are all independants from the main app.
+The versioning of the differents packages created for armada are all independants from the main app. For more information view [packages documentation](packages.md)
