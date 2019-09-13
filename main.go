@@ -26,9 +26,9 @@ func main() {
 	flag.Parse()
 
 	a, err := utils.FileExists(*file)
-	if a == false (
-		fmt.Println(err)
-	)
+	if a == false {
+		log.Fatal(err)
+	}
 	source, err := ioutil.ReadFile(*file)
 	if err != nil {
 		log.Fatal(err)
