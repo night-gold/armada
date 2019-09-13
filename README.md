@@ -75,7 +75,7 @@ See specific documentation for [packages](docs/packages.md)
  - [x] ~~Add auto apply option (-a)~~
  - [ ] Make a better documentation
  - [x] ~~Add git authentication options~~
- - [ ] Allow default overlays generation with overlays value in file
+ - [ ] Allow default overlays generation with namespace value in file
  - [ ] Allow package multiple deployment inside a single namespace (naming of each resources)
  - [ ] Add installation option (brew...)
  - [ ] Add a cache option for package deployed multiple time
