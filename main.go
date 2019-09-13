@@ -25,6 +25,10 @@ func main() {
 	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
 	flag.Parse()
 
+	a, err := utils.FileExists(*file)
+	if a == false {
+		log.Fatal(err)
+	}
 	source, err := ioutil.ReadFile(*file)
 	if err != nil {
 		log.Fatal(err)
