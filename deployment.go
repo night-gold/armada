@@ -11,9 +11,16 @@ type Deployment struct {
 type Deps interface {
 	setOverlays()
 	setFolder()
-	setWait()
 }
 
 func (d *Deployment) setOverlays() {
+	if(d.Overlays == ""){
+		d.Overlays = "apply"
+	}
+}
 
+func (d *Deployment) setFolder(repo string) {
+	if(d.Folder == ""){
+		d.Folder = repo
+	}
 }

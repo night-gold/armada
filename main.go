@@ -5,24 +5,25 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"os/exec"
-	"time"
+	/* "os/exec"
+	"time" */
 	"regexp"
+	"fmt"
 
-	"github.com/matthewrsj/copy"
+	/* "github.com/matthewrsj/copy" */
 	"github.com/night-gold/armada/utils"
-	git "gopkg.in/src-d/go-git.v4"
-	"gopkg.in/src-d/go-git.v4/plumbing"
+	/* git "gopkg.in/src-d/go-git.v4"
+	"gopkg.in/src-d/go-git.v4/plumbing" */
 	"gopkg.in/yaml.v2"
 )
 
 func main() {
-	var config Config
-	var url string
+	var packages Packages
+	/* var url string */
 
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
-	overlays := flag.String("o", "", "Default overlays for all deployment")
-	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
+	/* overlays := flag.String("o", "", "Default overlays for all deployment")
+	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration") */
 	flag.Parse()
 
 	a, err := utils.FileExists(*file)
@@ -33,35 +34,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = yaml.Unmarshal(source, &config)
+	err = yaml.Unmarshal(source, &packages)
 	if err != nil {
 		log.Panic(err)
 	}
 
-	for _, repo := range config.Repo {
-		if repo.Version == "" {
-			repo.Version = "master"
-		}
-		if repo.Git == "" {
-			repo.Git = "https://github.com"
-		}
-		if repo.User == "" {
-			repo.User = "armada"
-		}
-		if repo.Folder == "" {
-			repo.Folder = repo.Repository
-		}
-		if *overlays != "" && repo.Overlays == "" {
-			repo.Overlays = *overlays
-		} else if repo.Overlays == "" {
-			repo.Overlays = "apply"
-		}
-		if repo.Private {
-			url = repo.Git + ":" + repo.User + "/" + repo.Repository
-		} else {
-			url = repo.Git + "/" + repo.User + "/" + repo.Repository
-		}
-		ref := setRef(repo.Version)
+	for _, pack := range packages.Package {
+		pack.setGit()
+		pack.setDeployment()
+		fmt.Println(pack.Git.Repository)
+		fmt.Println(pack.Deployment.Overlays)
+		/* ref := setRef(repo.Version)
 		_, err := git.PlainClone(os.TempDir()+"/"+repo.Repository, false, &git.CloneOptions{
 			URL:           url,
 			Progress:      os.Stdout,
@@ -101,7 +84,7 @@ func main() {
 
 		if repo.Wait != 0 {
 			time.Sleep(time.Duration(repo.Wait) * time.Second)
-		}
+		} */
 	}
 }
 

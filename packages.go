@@ -10,3 +10,18 @@ type Package struct {
 	Git Git
 	Deployment Deployment
 }
+
+// Pack set functions for package struct
+type Pack interface {
+	setGit(git Git)
+	setDeployment(dep Deployment)
+}
+
+func (p *Package) setGit() {
+	
+}
+
+func (p *Package) setDeployment() {
+	p.Deployment.setFolder(p.Git.Repository)
+	p.Deployment.setOverlays()
+}
