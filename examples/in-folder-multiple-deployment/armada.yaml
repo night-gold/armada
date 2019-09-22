@@ -1,11 +1,15 @@
 --- 
-repo:
-  - repository: armada-prom-op
-    version: master
-    user: night-gold
-    folder: "."
-  - repository: armada-prom-op
-    version: master
-    user: night-gold
-    overlays: apply1
-    folder: "."
+package:
+  - git:
+      repository: armada-prometheus-operator
+      version: master
+      user: night-gold
+    deployment:
+      folder: "."
+  - git:
+      repository: armada-prometheus-operator
+      version: master
+      user: night-gold
+    deployment:
+      folder: "."
+      overlays: apply1

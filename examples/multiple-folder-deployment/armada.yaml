@@ -1,7 +1,10 @@
 ---
-repo:
-  - repository: armada-prom-op
-    user: night-gold
-  - repository: armada-prom-op
-    user: night-gold
-    folder: armada-prom-op-1
+package:
+  - git:
+      repository: armada-prometheus-operator
+      user: night-gold
+  - git:
+      repository: armada-prometheus-operator
+      user: night-gold
+    deployment:
+      folder: armada-prometheus-operator-1
