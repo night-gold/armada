@@ -18,7 +18,6 @@ import (
 
 func main() {
 	var packages Packages
-	var url string
 
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
 	overlays := flag.String("o", "", "Default overlays for all deployment")
@@ -41,6 +40,8 @@ func main() {
 	for _, pack := range packages.Package {
 		pack.setGit()
 		pack.setDeployment(*overlays)
+
+		url := pack.Git.setUrl()
 
 		ref := setRef(pack.Git.Version)
 		_, err := git.PlainClone(os.TempDir()+"/"+pack.Git.Repository, false, &git.CloneOptions{

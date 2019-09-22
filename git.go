@@ -14,6 +14,7 @@ type Repo interface {
 	setGit()
 	setVersion()
 	setUser()
+	setUrl()
 }
 
 func (g *Git) setGit() {
@@ -32,4 +33,11 @@ func (g *Git) setUser() {
 	if (g.Git == "") {
 		g.Git = "armada"
 	}
+}
+
+func (g *Git) setUrl() string{
+	if g.Private {
+		return g.Git + ":" + g.User + "/" + g.Repository
+	}
+	return g.Git + "/" + g.User + "/" + g.Repository
 }
