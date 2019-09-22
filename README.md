@@ -36,13 +36,15 @@ The armada file configuration should look like this.
 
 ```
 --- 
-repo:
-  - repository: armada-prom-op
-    version: master
-    user: night-gold
-    folder: "."
-    Git: https://github.com
-    Overlays: apply
+package:
+  - git:
+      repository: armada-prometheus-operator
+      version: master
+      user: night-gold
+      git: https://github.com
+    deployment:
+      folder: "."
+      overlays: apply
 ```
 
 Use armada to generate the app.yaml file.
