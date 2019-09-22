@@ -38,3 +38,7 @@ The minimal configuration thinking put some restriction on the resources that ca
 ## Skeleton
 
 There is a [package skeleton](../examples/package-skeleton) in the examples folder
+
+## Listing
+
+Feel free to make Pull Requests to the available packages list.

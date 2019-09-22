@@ -54,12 +54,14 @@ The generated file can be used directly to deploy to a kubernetes cluster using 
 
 ## Community
 
-Before filling a bug please take a look here: [bugs](docs/bugs.md)
+Before filling a bug please take a look here: [bugs](docs/bugs.md).
+
 Before making a merge request please take a look here: [merge request](docs/mr.md) 
 
 ### Code of conduct 
 
-Please be polite and respectful when communicating, filling a bug, commenting or when updating the repo. In case of non respect of this simple rule the comment will be deleted.  
+Please be polite and respectful when communicating, filling a bug, commenting or when updating the repo. In case of non respect of this simple rule the comment will be deleted.
+
 ### Create a package
 
 See specific documentation for [packages](docs/packages.md)
