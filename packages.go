@@ -18,7 +18,9 @@ type Pack interface {
 }
 
 func (p *Package) setGit() {
-	
+	p.Git.setGit()
+	p.Git.setVersion()
+	p.Git.setUser()
 }
 
 func (p *Package) setDeployment(overlays string) {
