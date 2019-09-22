@@ -21,7 +21,7 @@ func (p *Package) setGit() {
 	
 }
 
-func (p *Package) setDeployment() {
+func (p *Package) setDeployment(overlays string) {
 	p.Deployment.setFolder(p.Git.Repository)
-	p.Deployment.setOverlays()
+	p.Deployment.setOverlays(overlays)
 }

@@ -1,9 +1,5 @@
 package main
 
-import (
-	"log"
-)
-
 // Git struct contains all element refering to git
 type Git struct {
 	Repository string

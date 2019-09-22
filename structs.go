@@ -6,7 +6,7 @@ type Config struct {
 }
 
 // Repo represents a kustomize package app
-type Repo struct {
+/* type Repo struct {
 	Repository string
 	Git        string
 	Version    string
@@ -16,3 +16,4 @@ type Repo struct {
 	Private    bool
 	Wait       int
 }
+ */

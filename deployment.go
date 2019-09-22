@@ -13,9 +13,11 @@ type Deps interface {
 	setFolder()
 }
 
-func (d *Deployment) setOverlays() {
-	if(d.Overlays == ""){
+func (d *Deployment) setOverlays(overlays string) {
+	if(d.Overlays == "" && overlays == ""){
 		d.Overlays = "apply"
+	}else if (overlays != "") {
+		d.Overlays = overlays
 	}
 }
 

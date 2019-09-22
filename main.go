@@ -5,25 +5,24 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	/* "os/exec"
-	"time" */
+	"os/exec"
+	"time"
 	"regexp"
-	"fmt"
 
-	/* "github.com/matthewrsj/copy" */
+	"github.com/matthewrsj/copy"
 	"github.com/night-gold/armada/utils"
-	/* git "gopkg.in/src-d/go-git.v4"
-	"gopkg.in/src-d/go-git.v4/plumbing" */
+	git "gopkg.in/src-d/go-git.v4"
+	"gopkg.in/src-d/go-git.v4/plumbing"
 	"gopkg.in/yaml.v2"
 )
 
 func main() {
 	var packages Packages
-	/* var url string */
+	var url string
 
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
-	/* overlays := flag.String("o", "", "Default overlays for all deployment")
-	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration") */
+	overlays := flag.String("o", "", "Default overlays for all deployment")
+	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
 	flag.Parse()
 
 	a, err := utils.FileExists(*file)
@@ -41,50 +40,49 @@ func main() {
 
 	for _, pack := range packages.Package {
 		pack.setGit()
-		pack.setDeployment()
-		fmt.Println(pack.Git.Repository)
-		fmt.Println(pack.Deployment.Overlays)
-		/* ref := setRef(repo.Version)
-		_, err := git.PlainClone(os.TempDir()+"/"+repo.Repository, false, &git.CloneOptions{
+		pack.setDeployment(*overlays)
+
+		ref := setRef(pack.Git.Version)
+		_, err := git.PlainClone(os.TempDir()+"/"+pack.Git.Repository, false, &git.CloneOptions{
 			URL:           url,
 			Progress:      os.Stdout,
-			ReferenceName: plumbing.ReferenceName(ref + repo.Version),
+			ReferenceName: plumbing.ReferenceName(ref + pack.Git.Version),
 			SingleBranch:  true,
 		})
 		if err != nil {
 			log.Panic(err)
 		}
 
-		erro := copy.All(os.TempDir()+"/"+repo.Repository+"/base", repo.Folder+"/base")
+		erro := copy.All(os.TempDir()+"/"+pack.Git.Repository+"/base", pack.Deployment.Folder+"/base")
 		if erro != nil {
 			log.Panic(erro)
 		}
 
 		if *apply {
-			cmd := exec.Command("kubectl", "apply", "-k", "overlays/"+repo.Overlays)
-			cmd.Dir = repo.Folder
+			cmd := exec.Command("kubectl", "apply", "-k", "overlays/"+pack.Deployment.Overlays)
+			cmd.Dir = pack.Deployment.Folder
 			//output, err := cmd.CombinedOutput()
 			err := cmd.Run()
 			if err != nil {
-				cleanFolder(repo.Repository, repo.Folder)
+				cleanFolder(pack.Git.Repository, pack.Deployment.Folder)
 				log.Panic(err)
 			}
 		} else {
-			cmd := exec.Command("kubectl", "kustomize", "overlays/"+repo.Overlays)
-			cmd.Dir = repo.Folder
+			cmd := exec.Command("kubectl", "kustomize", "overlays/"+pack.Deployment.Overlays)
+			cmd.Dir = pack.Deployment.Folder
 
-			if repo.Folder != repo.Repository && repo.Folder != "." {
-				utils.CmdOutputToFile(cmd, repo.Folder+"-"+repo.Overlays+".yaml")
+			if pack.Deployment.Folder != pack.Git.Repository && pack.Deployment.Folder != "." {
+				utils.CmdOutputToFile(cmd, pack.Deployment.Folder+"-"+pack.Deployment.Overlays+".yaml")
 			} else {
-				utils.CmdOutputToFile(cmd, repo.Repository+"-"+repo.Overlays+".yaml")
+				utils.CmdOutputToFile(cmd, pack.Git.Repository+"-"+pack.Deployment.Overlays+".yaml")
 			}
 		}
 
-		cleanFolder(repo.Repository, repo.Folder)
+		cleanFolder(pack.Git.Repository, pack.Deployment.Folder)
 
-		if repo.Wait != 0 {
-			time.Sleep(time.Duration(repo.Wait) * time.Second)
-		} */
+		if pack.Deployment.Wait != 0 {
+			time.Sleep(time.Duration(pack.Deployment.Wait) * time.Second)
+		}
 	}
 }
 
