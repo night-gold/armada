@@ -1,9 +1,12 @@
 ---
-repo:
-  - repository: armada-prom-op
-    user: night-gold
-  - repository: private-armada-prom-op
-    user: night-gold
-    folder: armada-prom-op-1
-    git: git@github.com
-    private: true
+package:
+  - git:
+      repository: armada-prometheus-operator
+      user: night-gold
+  - git:
+      repository: private-armada-prom-op
+      user: night-gold
+      git: git@github.com
+      private: true
+    deployment:
+      folder: armada-prometheus-operator-1
