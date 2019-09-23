@@ -2,18 +2,16 @@ package main
 
 import (
 	"flag"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
-	"time"
 	"regexp"
+	"time"
 
 	"github.com/matthewrsj/copy"
 	"github.com/night-gold/armada/utils"
 	git "gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
-	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -24,18 +22,7 @@ func main() {
 	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
 	flag.Parse()
 
-	a, err := utils.FileExists(*file)
-	if a == false {
-		log.Fatal(err)
-	}
-	source, err := ioutil.ReadFile(*file)
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = yaml.Unmarshal(source, &packages)
-	if err != nil {
-		log.Panic(err)
-	}
+	packages.loadingYaml(*file)
 
 	for _, pack := range packages.Package {
 		pack.setGit()
@@ -92,15 +79,15 @@ func cleanFolder(repo string, fold string) {
 	os.RemoveAll(fold + "/base")
 }
 
-func setRef(version string) string{
+func setRef(version string) string {
 	ref := "refs/heads/"
 	reg, err := regexp.MatchString(".*v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.*", version)
 	if err != nil {
 		log.Panic(err)
 	}
-	if (reg){
+	if reg {
 		ref = "refs/tags/"
 		return ref
 	}
-	return ref 
+	return ref
 }
