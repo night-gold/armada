@@ -8,6 +8,7 @@
 
 ## Armada file fields
 
+- **name**: This is the name of the package going to be deployed.
 - **git**: This field contains everything in relation to git.
     - **repository** : This field has the name of the repository we want to use. It also serves as the default value for the folder and the result file name. This field has no default value, it's a necessary field.
     - **git** : The url of the git we are going to look for the package, gitlab, github, etc... The default value is https://github.com. For private repository you should use the `git@github.com` version of the git service you are using.
