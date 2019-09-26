@@ -2,6 +2,7 @@ package main
 
 // Package struct contains field refering to a specific package and one deployment
 type Package struct {
+	Name       string
 	Git        Git
 	Deployment Deployment
 }
