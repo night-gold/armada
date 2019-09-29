@@ -30,6 +30,8 @@ func main() {
 
 		url := pack.Git.setUrl()
 
+		utils.CreateFolder(pack.Deployment.Folder)
+
 		ref := setRef(pack.Git.Version)
 		_, err := git.PlainClone(os.TempDir()+"/"+pack.Git.Repository, false, &git.CloneOptions{
 			URL:           url,
