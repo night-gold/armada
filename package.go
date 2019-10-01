@@ -14,6 +14,7 @@ type Pack interface {
 }
 
 func (p *Package) setGit() {
+	p.Git.checkRepository()
 	p.Git.setGit()
 	p.Git.setVersion()
 	p.Git.setUser()
