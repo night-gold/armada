@@ -17,6 +17,7 @@ import (
 func main() {
 	var packages Packages
 
+	flag.Usage = flagUsage
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
 	overlays := flag.String("o", "", "Default overlays for all deployment")
 	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
