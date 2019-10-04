@@ -11,7 +11,7 @@ type Git struct {
 	Version    string
 	User       string
 	Private    bool
-	BasePath   string
+	Basepath   string
 }
 
 // Repo interface is here to declare Git function
@@ -56,7 +56,7 @@ func (g *Git) setUrl() string {
 }
 
 func (g *Git) setBasePath() {
-	if g.BasePath == "" {
-		g.BasePath = "."
+	if g.Basepath == "" {
+		g.Basepath = "."
 	}
 }
