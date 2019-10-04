@@ -42,7 +42,7 @@ func main() {
 			log.Panic(err)
 		}
 
-		erro := copy.All(os.TempDir()+"/"+pack.Git.Repository+"/base", pack.Deployment.Folder+"/base")
+		erro := copy.All(os.TempDir()+"/"+pack.Git.Repository+"/"+pack.Git.BasePath+"/base", pack.Deployment.Folder+"/base")
 		if erro != nil {
 			log.Panic(erro)
 		}

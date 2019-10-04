@@ -18,6 +18,7 @@ func (p *Package) setGit() {
 	p.Git.setGit()
 	p.Git.setVersion()
 	p.Git.setUser()
+	p.Git.setBasePath()
 }
 
 func (p *Package) setDeployment(overlays string) {
