@@ -25,6 +25,10 @@ func main() {
 
 	packages.loadingYaml(*file)
 
+	if len(packages.Namespaces) > 0 {
+		createNamespace(packages.Namespaces)
+	}
+
 	for _, pack := range packages.Package {
 		pack.setGit()
 		pack.setDeployment(*overlays)
@@ -91,4 +95,14 @@ func setRef(version string) string {
 		return ref
 	}
 	return ref
+}
+
+func createNamespace(namespaces []string) {
+	for _, namespace := range namespaces {
+		cmd := exec.Command("kubectl", "create", "namespace", namespace)
+		err := cmd.Run()
+		if err != nil {
+			log.Panic(err)
+		}
+	}
 }

@@ -6,7 +6,11 @@
 - **-o** Default overlays you are deploying, value can be overrided by the overlays field in armada file.
 - **-a** Auto apply the newly generated configuration to your cluster.
 
-## Armada file fields
+## Armada file other fields
+
+- **namespaces**: A list of string that will be used to create namespaces.
+
+## Armada file package fields
 
 - **name**: This is the name of the package going to be deployed.
 - **git**: This field contains everything in relation to git.
