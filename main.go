@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -24,6 +25,10 @@ func main() {
 	flag.Parse()
 
 	packages.loadingYaml(*file)
+
+	if len(packages.Namespaces) > 0 {
+		fmt.Println("test")
+	}
 
 	for _, pack := range packages.Package {
 		pack.setGit()
@@ -91,4 +96,14 @@ func setRef(version string) string {
 		return ref
 	}
 	return ref
+}
+
+func createNamespace(namespaces []string) {
+	for _, namespace := range namespaces {
+		cmd := exec.Command("kubectl", "create", "namespace", namespace)
+		err := cmd.Run()
+		if err != nil {
+			log.Panic(err)
+		}
+	}
 }

@@ -10,7 +10,8 @@ import (
 
 // Packages is an array of Packages struct
 type Packages struct {
-	Package []Package
+	Namespaces []string
+	Package    []Package
 }
 
 // Pac set interface for packages structs
