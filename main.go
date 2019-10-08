@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -27,7 +26,7 @@ func main() {
 	packages.loadingYaml(*file)
 
 	if len(packages.Namespaces) > 0 {
-		fmt.Println("test")
+		createNamespace(packages.Namespaces)
 	}
 
 	for _, pack := range packages.Package {
