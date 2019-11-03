@@ -3,8 +3,8 @@ package main
 // Deployment struct contain deployment specific informations
 type Deployment struct {
 	Overlays string
-	Folder string
-	Wait int
+	Folder   string
+	Wait     int
 }
 
 // Deps interface for Deployment struct
@@ -14,15 +14,15 @@ type Deps interface {
 }
 
 func (d *Deployment) setOverlays(overlays string) {
-	if(d.Overlays == "" && overlays == ""){
+	if d.Overlays == "" && overlays == "" {
 		d.Overlays = "apply"
-	}else if (overlays != "") {
+	} else if overlays != "" {
 		d.Overlays = overlays
 	}
 }
 
-func (d *Deployment) setFolder(repo string) {
-	if(d.Folder == ""){
-		d.Folder = repo
+func (d *Deployment) setFolder() {
+	if d.Folder == "" {
+		d.Folder = "."
 	}
 }
