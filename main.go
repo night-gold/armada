@@ -4,7 +4,6 @@ import (
 	"flag"
 	"log"
 	"os/exec"
-	"regexp"
 	"time"
 
 	"github.com/night-gold/armada/utils"
@@ -47,19 +46,6 @@ func main() {
 			time.Sleep(time.Duration(pack.Deployment.Wait) * time.Second)
 		}
 	}
-}
-
-func setRef(version string) string {
-	ref := "refs/heads/"
-	reg, err := regexp.MatchString(".*v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.*", version)
-	if err != nil {
-		log.Panic(err)
-	}
-	if reg {
-		ref = "refs/tags/"
-		return ref
-	}
-	return ref
 }
 
 func createNamespace(namespaces []string) {
