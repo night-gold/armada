@@ -10,6 +10,8 @@ For armada to works, you need to have a recent version of kubectl (>= 1.14) with
 
 ## Usage
 
+Armada uses Kubernetes embed capacity to use git repository as a base. For more informations please have a look at the examples
+
 ![Alt Text](https://i.imgur.com/JNoI2MY.gif)
 
 ### 1) Create a kustomize package file struct
@@ -37,12 +39,7 @@ The armada file configuration should look like this.
 ```
 --- 
 package:
-  - git:
-      repository: armada-prometheus-operator
-      version: master
-      user: night-gold
-      git: https://github.com
-    deployment:
+  - deployment:
       folder: "."
       overlays: apply
 ```
@@ -74,11 +71,8 @@ See specific documentation for [packages](docs/packages.md)
  - [x] ~~Add overlays options (-o, default value and file option)~~
  - [x] ~~Add auto apply option (-a)~~
  - [ ] Make a better documentation
- - [x] ~~Add git authentication options~~
  - [ ] Allow default overlays generation with overlays value in file
  - [ ] Allow package multiple deployment inside a single namespace (naming of each resources)
  - [ ] Add installation option (brew...)
- - [ ] Add a cache option for package deployed multiple time
  - [x] ~~Add a sleep time if CRD creation for operator is a bit long (prometheus-operator) before creating new resources.~~
- - [ ] Allow non package restrictive repository to not store their base folder at the root of their repository.
  - [ ] Add an stdout option?
