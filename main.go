@@ -20,7 +20,7 @@ func main() {
 
 	packages.loadingYaml(*file)
 
-	if len(packages.Namespaces) > 0 {
+	if len(packages.Namespaces) > 0 && *apply {
 		createNamespace(packages.Namespaces)
 	}
 
