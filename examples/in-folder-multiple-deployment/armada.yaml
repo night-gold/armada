@@ -1,15 +1,9 @@
 --- 
 package:
-  - git:
-      repository: armada-prometheus-operator
-      version: master
-      user: night-gold
+  - name: prometheus-operator
     deployment:
       folder: "."
-  - git:
-      repository: armada-prometheus-operator
-      version: master
-      user: night-gold
+  - name: prometheus-operator-1
     deployment:
       folder: "."
       overlays: apply1

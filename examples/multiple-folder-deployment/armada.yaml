@@ -1,10 +1,6 @@
 ---
 package:
-  - git:
-      repository: armada-prometheus-operator
-      user: night-gold
-  - git:
-      repository: armada-prometheus-operator
-      user: night-gold
+  - name: prometheus-operator
+  - name: prometheus-operator-1
     deployment:
       folder: armada-prometheus-operator-1

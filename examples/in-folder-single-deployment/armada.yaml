@@ -1,6 +1,5 @@
 --- 
 package:
-  - git:
-      repository: armada-prom-op
-      user: night-gold
+  - name: prometheus-operator
+    deployment:
       folder: "."
