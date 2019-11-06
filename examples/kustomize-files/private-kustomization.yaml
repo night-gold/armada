@@ -1,0 +1,7 @@
+---
+bases:
+- git@github.com:night-gold/private-armada-hello-world//base?ref=master
+patches:
+- service.yaml
+resources:
+- ingress.yaml

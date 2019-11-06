@@ -1,29 +1,35 @@
 package main
 
+import (
+	"io/ioutil"
+	"log"
+
+	"github.com/night-gold/armada/utils"
+	"gopkg.in/yaml.v2"
+)
+
 // Packages is an array of Packages struct
 type Packages struct {
-	Package []Package
+	Namespaces []string
+	Package    []Package
 }
 
-// Package struct contains field refering to a specific package and one deployment
-type Package struct {
-	Git Git
-	Deployment Deployment
+// Pac set interface for packages structs
+type Pac interface {
+	loadingYaml()
 }
 
-// Pack set functions for package struct
-type Pack interface {
-	setGit(git Git)
-	setDeployment(dep Deployment)
-}
-
-func (p *Package) setGit() {
-	p.Git.setGit()
-	p.Git.setVersion()
-	p.Git.setUser()
-}
-
-func (p *Package) setDeployment(overlays string) {
-	p.Deployment.setFolder(p.Git.Repository)
-	p.Deployment.setOverlays(overlays)
+func (p *Packages) loadingYaml(file string) {
+	a, err := utils.FileExists(file)
+	if a == false {
+		log.Fatal(err)
+	}
+	source, err := ioutil.ReadFile(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = yaml.Unmarshal(source, &p)
+	if err != nil {
+		log.Panic(err)
+	}
 }

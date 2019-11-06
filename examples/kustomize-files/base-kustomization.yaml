@@ -1,0 +1,7 @@
+---
+bases:
+- github.com/night-gold/armada-hello-world//base?ref=master
+patches:
+- service.yaml
+resources:
+- ingress.yaml
