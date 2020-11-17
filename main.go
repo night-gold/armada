@@ -39,7 +39,8 @@ func main() {
 			cmd := exec.Command("kubectl", "kustomize", "overlays/"+pack.Deployment.Overlays)
 			cmd.Dir = pack.Deployment.Folder
 
-			utils.CmdOutputToFile(cmd, pack.Deployment.Folder+"-"+pack.Deployment.Overlays+".yaml")
+			folder := utils.GetTargetFolder(pack.Deployment.Folder)
+			utils.CmdOutputToFile(cmd, folder+"-"+pack.Deployment.Overlays+".yaml")
 		}
 
 		if pack.Deployment.Wait != 0 {
