@@ -8,6 +8,7 @@ For templating we choose simple go templating, and the value can be fetched from
 
 - The templating is not here to replace kustomize basic usage, just to ease the use of it and prevent unwanted duplication of resources that we really want to be able to variabilise.
 - Templating can't be used with remote base as the base would be called by the kubectl command.
+- The kustomization.yaml file, template or not, should always target the end result file that we want and not the those with .tmpl extension.
 
 # Usage
 
@@ -27,3 +28,24 @@ patches:
 ```
 
 In the example you can see that we templated the kustomization file from an overlays and variabilized the namespace to allow us to be able to create multiple deployment in different namespace and if we did not define anything it would deploy in the default namespace.
+
+# File structure
+
+With template the file structure would look something like that:
+> ```
+> /app
+> ├── redis
+> │   ├── armada.yaml
+> │   ├── base
+> │   │   ├── kustomization.yaml
+> │   │   ├── deployment.yaml.tmpl
+> │   │   └── service.yaml
+> │   └── overlays
+> │       └── apply
+> │           └── kustomization.yaml.tmpl
+> └── Microservice
+>     ├── armada.yaml
+>     └── overlays
+>         └── apply
+>             └── kustomization.yaml
+> ```

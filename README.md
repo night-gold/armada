@@ -65,6 +65,10 @@ Please be polite and respectful when communicating, filling a bug, commenting or
 
 See specific documentation for [packages](docs/packages.md)
 
+### Templates
+
+See specific documentation for [templates](docs/templating.md)
+
 ### ToDo
 
  - [ ] Write some test
