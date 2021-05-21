@@ -4,6 +4,7 @@ package main
 type Package struct {
 	Name       string
 	Deployment Deployment
+	Variables  []string
 }
 
 // Pack set functions for package struct

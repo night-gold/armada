@@ -1,10 +1,9 @@
 module github.com/night-gold/armada
 
-go 1.12
+go 1.16
 
 require (
-	github.com/matthewrsj/copy v0.0.0-20181103000656-14e06560b46c
-	github.com/src-d/go-git v4.7.0+incompatible
-	gopkg.in/src-d/go-git.v4 v4.12.0
-	gopkg.in/yaml.v2 v2.2.2
+	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
+	gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b // indirect
+	gopkg.in/yaml.v2 v2.4.0
 )

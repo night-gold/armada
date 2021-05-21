@@ -1,16 +1,16 @@
 # Armada
 
-Manage deployment of packaged [Kustomize](https://github.com/kubernetes-sigs/kustomize) apps.
+Adds templating capacity and manage deployment to [Kustomize](https://github.com/kubernetes-sigs/kustomize) apps.
 
-It allows you to git clone a packaged kustomize base and call it with the help of a config file.
+Templating uses go template to allow you to generate kustomize apps with templates inside.
+
+Armada allows you to git clone a packaged kustomize base and call it with the help of a config file.
 
 ## Pre-requisite
 
 For armada to works, you need to have a recent version of kubectl (>= 1.14) with kustomize integration as armada will make calls to the kubectl command line to build the yaml file using `kubectl -k` option.
 
 ## Usage
-
-Armada uses Kubernetes embed capacity to use git repository as a base. For more informations please have a look at the examples
 
 ![Alt Text](https://i.imgur.com/JNoI2MY.gif)
 

@@ -16,6 +16,7 @@ func main() {
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
 	overlays := flag.String("o", "", "Default overlays for all deployment")
 	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
+	remove := flag.Bool("r", true, "Remove the file generated using the templates")
 	flag.Parse()
 
 	packages.loadingYaml(*file)
@@ -26,6 +27,8 @@ func main() {
 
 	for _, pack := range packages.Package {
 		pack.setDeployment(*overlays)
+
+		toDel := utils.Templating(pack.Variables, pack.Deployment.Overlays)
 
 		if *apply {
 			cmd := exec.Command("kubectl", "apply", "-k", "overlays/"+pack.Deployment.Overlays)
@@ -39,7 +42,15 @@ func main() {
 			cmd := exec.Command("kubectl", "kustomize", "overlays/"+pack.Deployment.Overlays)
 			cmd.Dir = pack.Deployment.Folder
 
-			utils.CmdOutputToFile(cmd, pack.Deployment.Folder+"-"+pack.Deployment.Overlays+".yaml")
+			if pack.Deployment.Folder != "" {
+				utils.CmdOutputToFile(cmd, pack.Deployment.Folder+"-"+pack.Deployment.Overlays+".yaml")
+			} else {
+				utils.CmdOutputToFile(cmd, pack.Deployment.Overlays+".yaml")
+			}
+		}
+
+		if *remove {
+			utils.RemoveFiles(toDel)
 		}
 
 		if pack.Deployment.Wait != 0 {
