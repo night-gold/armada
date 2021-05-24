@@ -14,4 +14,5 @@ type Pack interface {
 
 func (p *Package) setDeployment(overlays string) {
 	p.Deployment.setOverlays(overlays)
+	p.Deployment.setFolder()
 }

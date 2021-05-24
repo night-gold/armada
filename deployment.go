@@ -24,5 +24,7 @@ func (d *Deployment) setOverlays(overlays string) {
 func (d *Deployment) setFolder() {
 	if d.Folder == "" {
 		d.Folder = "."
+	} else if d.Overlays == "." {
+		d.Folder = "../.."
 	}
 }

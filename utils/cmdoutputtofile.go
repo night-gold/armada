@@ -1,21 +1,24 @@
 package utils
 
 import (
+	"bytes"
+	"log"
 	"os"
 	"os/exec"
-	"log"
 )
 
-// CmdOutputToFile write the cmd output to a file
-func CmdOutputToFile(cmd *exec.Cmd, file string){
+func CmdOutputToFile(cmd *exec.Cmd, file string) {
+	var cmdErr bytes.Buffer
 	outfile, err := os.Create(file)
 	if err != nil {
 		log.Panic(err)
 	}
 	defer outfile.Close()
 	cmd.Stdout = outfile
-	err = cmd.Start(); if err != nil {
-		log.Panic(err)
+	cmd.Stderr = &cmdErr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(cmdErr.String())
 	}
 	cmd.Wait()
 }

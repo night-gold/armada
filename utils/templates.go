@@ -1,32 +1,32 @@
 package utils
 
 import (
-	"html/template"
 	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+	"text/template"
 )
 
 var templates []string
 var overlay string
 
-func Templating(vars []string, overlays string) []string {
+func Templating(target string, vars []string, overlays string) []string {
 	var removes []string
 	overlay = overlays
-	err := filepath.WalkDir(".", walkdir)
+	err := filepath.WalkDir(target, walkdir)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for _, f := range templates {
-		t, err := template.ParseFiles(f)
+		res, err := os.Create(strings.Replace(f, ".tmpl", "", -1))
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		res, err := os.Create(strings.Replace(f, ".tmpl", "", -1))
+		t, err := template.ParseFiles(f)
 		if err != nil {
 			log.Fatal(err)
 		}
