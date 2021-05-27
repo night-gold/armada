@@ -30,7 +30,7 @@ func main() {
 	for _, pack := range packages.Package {
 		pack.setDeployment(*overlays)
 
-		toDel, err := utils.Templating(pack.Deployment.Folder, pack.Variables, pack.Deployment.Overlays)
+		toDel, err := utils.Templating(pack.Deployment.Folder, pack.Deployment.Overlays)
 		if err != nil {
 			log.Fatal(err)
 		}

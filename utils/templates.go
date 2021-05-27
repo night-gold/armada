@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -13,7 +14,7 @@ import (
 var templates []string
 var overlay string
 
-func Templating(target string, vars []string, overlays string) ([]string, error) {
+func Templating(target string, overlays string) ([]string, error) {
 	var removes []string
 	overlay = overlays
 	err := filepath.WalkDir(target, walkdir)
@@ -34,34 +35,36 @@ func Templating(target string, vars []string, overlays string) ([]string, error)
 
 		removes = append(removes, res.Name())
 
-		var tmplVar []string
 		validate := regexp.MustCompile(`^{{.*}}$`)
+		config := make(map[string]string)
 		for _, r := range t.Root.Nodes {
 			if validate.MatchString(r.String()) {
 				r1 := strings.Replace(r.String(), "{{", "", -1)
 				r2 := strings.Replace(r1, "}}", "", -1)
 				s := strings.Split(r2, " ")
-				for _, res := range s {
-					if strings.Contains(res, ".") {
-						f := strings.Replace(res, ".", "", -1)
-						tmplVar = append(tmplVar, f)
+				if notContains(s, "or") {
+					for _, res := range s {
+						if strings.Contains(res, ".") {
+							f := strings.Replace(res, ".", "", -1)
+							value, present := os.LookupEnv(f)
+							if !present {
+								return nil, errors.New("The variable " + f + " is not set but exists in the template " + t.Name() + "!")
+							}
+							config[f] = value
+						}
+					}
+				} else {
+					for _, res := range s {
+						if strings.Contains(res, ".") {
+							f := strings.Replace(res, ".", "", -1)
+							value, present := os.LookupEnv(f)
+							if !present {
+								fmt.Println("The variable " + f + " is not set but there is a default value in template " + t.Name() + "!")
+							}
+							config[f] = value
+						}
 					}
 				}
-			}
-		}
-
-		config := make(map[string]string)
-		for _, v := range vars {
-			value, present := os.LookupEnv(v)
-			if !present {
-				return nil, errors.New("The variable " + v + " is not set!")
-			}
-			config[v] = value
-		}
-
-		for _, val := range tmplVar {
-			if val, ok := config[val]; !ok {
-				return nil, errors.New("The variable " + val + " is not set but exists in the template " + t.Name() + "!")
 			}
 		}
 
@@ -84,4 +87,13 @@ func walkdir(s string, d fs.DirEntry, e error) error {
 		templates = append(templates, s)
 	}
 	return nil
+}
+
+func notContains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return false
+		}
+	}
+	return true
 }
