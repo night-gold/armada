@@ -3,25 +3,32 @@ package main
 import (
 	"bytes"
 	"flag"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
 	"time"
 
 	"github.com/night-gold/armada/utils"
+	"gopkg.in/yaml.v2"
 )
 
 func main() {
 	var packages Packages
+	config := make(map[string]string)
 
 	flag.Usage = flagUsage
 	file := flag.String("f", "armada.yaml", "Armada package file to load")
 	overlays := flag.String("o", "", "Default overlays for all deployment")
+	vars := flag.String("v", "", "Default config for templates variables")
 	apply := flag.Bool("a", false, "Auto apply of the kustomize configuration")
 	remove := flag.Bool("r", false, "Remove the file generated using the templates")
 	flag.Parse()
 
 	packages.loadingYaml(*file)
+	if *vars != "" {
+		loadConfig(*vars, config)
+	}
 
 	if len(packages.Namespaces) > 0 && *apply {
 		createNamespace(packages.Namespaces)
@@ -30,7 +37,7 @@ func main() {
 	for _, pack := range packages.Package {
 		pack.setDeployment(*overlays)
 
-		toDel, err := utils.Templating(pack.Deployment.Folder, pack.Deployment.Overlays)
+		toDel, err := utils.Templating(pack.Deployment.Folder, config, pack.Deployment.Overlays)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -74,4 +81,16 @@ func createNamespace(namespaces []string) {
 			log.Panic(err)
 		}
 	}
+}
+
+func loadConfig(file string, conf map[string]string) {
+	a, err := utils.FileExists(file)
+	if a == false {
+		log.Fatal(err)
+	}
+	source, err := ioutil.ReadFile(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = yaml.Unmarshal(source, &conf)
 }
